@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: v004-create-users-sequence
+      author: Joao Vitor de Oliveira Santos
+      context: ddl
+      changes:
+        - createSequence:
+            schemaName: time_log
+            sequenceName: sq_users
+            startValue: 1
+            incrementBy: 1
