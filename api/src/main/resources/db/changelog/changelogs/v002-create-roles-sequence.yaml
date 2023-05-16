@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: v002-create-roles-sequence
+      author: Joao Vitor de Oliveira Santos
+      context: ddl
+      changes:
+        - createSequence:
+            schemaName: time_log
+            sequenceName: sq_roles
+            startValue: 1
+            incrementBy: 1
