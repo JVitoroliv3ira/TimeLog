@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: v006-1-create-user-role-table
+      author: Joao Vitor de Oliveira Santos
+      context: ddl
+      changes:
+        - createTable:
+            schemaName: time_log
+            tableName: tb_user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: numeric
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_role
+                    references: time_log.tb_users(id)
+              - column:
+                  name: role_id
+                  type: numeric
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role_user
+                    references: time_log.tb_roles(id)
+  - changeSet:
+      id: v006-2-user-role-add-primary-key
+      author: Joao Vitor de Oliveira Santos
+      context: ddl
+      changes:
+        - addPrimaryKey:
+            schemaName: time_log
+            tableName: tb_user_role
+            columnNames: user_id, role_id
