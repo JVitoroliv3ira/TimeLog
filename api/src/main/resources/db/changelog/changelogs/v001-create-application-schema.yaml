@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: v001-create-application-schema
+      author: Joao Vitor de Oliveira Santos
+      context: ddl
+      changes:
+        - sql:
+            sql: create schema time_log
