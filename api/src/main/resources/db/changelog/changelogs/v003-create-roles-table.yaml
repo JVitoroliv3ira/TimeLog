@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: v003-create-roles-table
+      author: Joao Vitor de Oliveira Santos
+      context: ddl
+      changes:
+        - createTable:
+            schemaName: time_log
+            tableName: tb_roles
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_role
+              - column:
+                  name: authority
+                  type: varchar2(45)
+                  constraints:
+                    nullable: false
