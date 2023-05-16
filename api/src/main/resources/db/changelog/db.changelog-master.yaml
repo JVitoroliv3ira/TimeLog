@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: "db/changelog/changelogs/v001-create-application-schema.yaml"
+  - include:
+      file: "db/changelog/changelogs/v002-create-roles-sequence.yaml"
+  - include:
+      file: "db/changelog/changelogs/v003-create-roles-table.yaml"
+  - include:
+      file: "db/changelog/changelogs/v004-create-users-sequence.yaml"
+  - include:
+      file: "db/changelog/changelogs/v005-create-users-table.yaml"
+  - include:
+      file: "db/changelog/changelogs/v006-create-user-role-table.yaml"
