@@ -16,7 +16,7 @@ import java.util.Objects;
 @Entity
 public class User implements IEntity<Long> {
     @Id
-    @SequenceGenerator(name = "sq_users", schema = "time_log", sequenceName = "sq_users")
+    @SequenceGenerator(name = "sq_users", schema = "time_log", sequenceName = "sq_users", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_users")
     @Column(name = "id")
     private Long id;
