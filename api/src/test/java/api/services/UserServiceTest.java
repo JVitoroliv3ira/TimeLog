@@ -1,5 +1,6 @@
 package api.services;
 
+import api.exceptions.BadRequestException;
 import api.exceptions.NotFoundException;
 import api.models.User;
 import api.repositories.UserRepository;
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class UserServiceTest {
     private static final String ENTITY_NOT_FOUND_MESSAGE = "Não foi possível encontrar este usuário na nossa base de dados.";
+    public static final String EMAIL_NOT_UNIQUE_ERROR_MESSAGE = "O email informado já está sendo utilizado por outro usuário.";
 
     @Mock
     private final UserRepository userRepository;
@@ -132,5 +134,22 @@ class UserServiceTest {
         Long payload = 9L;
         this.userService.existsById(payload);
         verify(this.userRepository, times(1)).existsById(payload);
+    }
+
+    @Test
+    void validate_email_uniqueness_should_call_exists_by_email_method_of_user_repository() {
+        String payload = "payload@payload.com";
+        when(this.userRepository.existsByEmail(payload)).thenReturn(Boolean.FALSE);
+        this.userService.validateEmailUniqueness(payload);
+        verify(this.userRepository, times(1)).existsByEmail(payload);
+    }
+
+    @Test
+    void validate_email_uniqueness_should_throw_an_bad_request_exception_when_the_requested_email_is_already_in_use() {
+        String payload = "payload@payload.com";
+        when(this.userRepository.existsByEmail(payload)).thenReturn(Boolean.TRUE);
+        assertThatThrownBy(() -> this.userService.validateEmailUniqueness(payload))
+                .isInstanceOf(BadRequestException.class)
+                .hasMessage(EMAIL_NOT_UNIQUE_ERROR_MESSAGE);
     }
 }
